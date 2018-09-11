@@ -10,6 +10,7 @@ services:
        - POSTGRES_PASSWORD=your_root_password
     volumes:
        - /var/lib/postgres:/var/lib/postgresql/data
+    network_mode: "bridge"
     restart: always
   pgadmin:
     image: "dpage/pgadmin4"
@@ -19,4 +20,9 @@ services:
     environment:   
        - PGADMIN_DEFAULT_EMAIL=user@domain.com
        - PGADMIN_DEFAULT_PASSWORD=your_root_password
+    network_mode: "bridge"
     restart: always
+    external_links:
+       - postgres
+    depends_on:
+       - postgres
